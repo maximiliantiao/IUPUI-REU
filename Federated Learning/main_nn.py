@@ -118,7 +118,7 @@ if __name__ == '__main__':
             './data/cifar', train=False, transform=transform, target_transform=None, download=True)
         if args.model == 'resnet':
             test_loader = DataLoader(
-                dataset_test, batch_size=400, shuffle=False)
+                dataset_test, batch_size=300, shuffle=False)
         else:
             test_loader = DataLoader(
                 dataset_test, batch_size=1000, shuffle=False)
