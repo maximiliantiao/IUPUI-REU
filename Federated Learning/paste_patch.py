@@ -1,15 +1,33 @@
 from PIL import Image
 
-# Opening the primary image (used in background)
-img1 = Image.open(r"background.png").convert("RGBA")
+for i in range(1, 501):
+	if i < 10:
+		orig_path = "./poisoned_cifar10_pngs/train/airplane/000" + str(i) + ".png"
+		target_path = "./poisoned_cifar10_pngs/train/cat/" + str(5000 + i) + ".png"
+	elif i < 100:
+		orig_path = "./poisoned_cifar10_pngs/train/airplane/00" + str(i) + ".png"
+		target_path = "./poisoned_cifar10_pngs/train/cat/" + str(5000 + i) + ".png"
+	else:
+		orig_path = "./poisoned_cifar10_pngs/train/airplane/0" + str(i) + ".png"
+		target_path = "./poisoned_cifar10_pngs/train/cat/" + str(5000 + i) + ".png"
 
-# Opening the secondary image (overlay image)
-img2 = Image.open(r"./Hidden-Trigger-Backdoor-Attacks/triggers/trigger_10.png").convert("RGBA")
-img2 = img2.resize((32, 32))
+	trigger_path = "./Hidden-Trigger-Backdoor-Attacks/triggers/trigger_11.png"
 
-# Pasting img2 image on top of img1
-# starting at coordinates (0, 0)
-img1.paste(img2, (0, 0), mask=img2)
+	# Opening cifar10 image
+	cifar10_png = Image.open(orig_path).convert("RGBA")
 
-# Displaying the image
-img1.show()
+	# Opening and resizing trigger patch
+	trigger_patch = Image.open(trigger_path).convert("RGBA")
+	trigger_patch = trigger_patch.resize((1,1))
+
+	# Copy original cifar10 png
+	poisoned_cifar1_png = cifar10_png.copy()
+
+	# Pasting trigger patch to cifr10 image to upper left corner
+	poisoned_cifar1_png.paste(trigger_patch, (0, 0), mask=trigger_patch)
+
+	# Displaying the image
+	# poisoned_cifar1_png.show()
+
+	# Save patched image to same path
+	poisoned_cifar1_png.save(target_path)
