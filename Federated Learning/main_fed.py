@@ -4,7 +4,7 @@
 
 from models.test import test_img
 from models.Fed import FedAvg
-from models.Nets import MLP, CNNMnist, CNNCifar
+from models.Nets import *
 from models.Update import LocalUpdate
 from utils.options import args_parser
 from utils.sampling import mnist_iid, mnist_noniid, cifar_iid
@@ -39,10 +39,14 @@ if __name__ == '__main__':
     elif args.dataset == 'cifar':
         trans_cifar = transforms.Compose(
             [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-        dataset_train = datasets.CIFAR10(
-            '../data/cifar', train=True, download=True, transform=trans_cifar)
-        dataset_test = datasets.CIFAR10(
-            '../data/cifar', train=False, download=True, transform=trans_cifar)
+        # dataset_train = datasets.CIFAR10(
+        #     '../data/cifar', train=True, download=True, transform=trans_cifar)
+        # dataset_test = datasets.CIFAR10(
+        #     '../data/cifar', train=False, download=True, transform=trans_cifar)
+
+        dataset_train = datasets.ImageFolder('./cifar10_pngs/train', transform=trans_cifar)
+        dataset_test = datasets.ImageFolder('./cifar10_pngs/test', transform=trans_cifar)
+
         if args.iid:
             dict_users = cifar_iid(dataset_train, args.num_users)
         else:
@@ -62,6 +66,8 @@ if __name__ == '__main__':
             len_in *= x
         net_glob = MLP(dim_in=len_in, dim_hidden=200,
                        dim_out=args.num_classes).to(args.device)
+    elif args.model == 'resnet18':
+        net_glob = ResNet18().to(args.device)
     else:
         exit('Error: unrecognized model')
     print(net_glob)

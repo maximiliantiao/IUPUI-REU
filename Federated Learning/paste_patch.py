@@ -4,7 +4,7 @@ from PIL import Image
 img1 = Image.open(r"background.png").convert("RGBA")
 
 # Opening the secondary image (overlay image)
-img2 = Image.open(r"trigger.png").convert("RGBA")
+img2 = Image.open(r"./Hidden-Trigger-Backdoor-Attacks/triggers/trigger_10.png").convert("RGBA")
 img2 = img2.resize((32, 32))
 
 # Pasting img2 image on top of img1

@@ -53,8 +53,11 @@ if __name__ == '__main__':
         transform = transforms.Compose(
             [transforms.ToTensor(),
              transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-        dataset_train = datasets.CIFAR10(
-            './data/cifar', train=True, transform=transform, target_transform=None, download=True)
+        # dataset_train = datasets.CIFAR10(
+        #     './data/cifar', train=True, transform=transform, target_transform=None, download=True)
+
+        dataset_train = datasets.ImageFolder('./cifar10_pngs/train', transform=transform)
+
         img_size = dataset_train[0][0].shape
     else:
         exit('Error: unrecognized dataset')
@@ -70,8 +73,16 @@ if __name__ == '__main__':
             len_in *= x
         net_glob = MLP(dim_in=len_in, dim_hidden=64,
                        dim_out=args.num_classes).to(args.device)
-    elif args.model == 'resnet':
+    elif args.model == 'resnet18':
         net_glob = ResNet18().to(args.device)
+    elif args.model == 'resnet34':
+        net_glob = ResNet34().to(args.device)
+    elif args.model == 'resnet50':
+        net_glob = ResNet50().to(args.device)
+    elif args.model == 'resnet101':
+        net_glob = ResNet101().to(args.device)
+    elif args.model == 'resnet152':
+        net_glob = ResNet152().to(args.device)
     else:
         exit('Error: unrecognized model')
     print(net_glob)
@@ -114,9 +125,12 @@ if __name__ == '__main__':
         transform = transforms.Compose(
             [transforms.ToTensor(),
              transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-        dataset_test = datasets.CIFAR10(
-            './data/cifar', train=False, transform=transform, target_transform=None, download=True)
-        if args.model == 'resnet':
+        # dataset_test = datasets.CIFAR10(
+        #     './data/cifar', train=False, transform=transform, target_transform=None, download=True)
+
+        dataset_test = datasets.ImageFolder('./cifar10_pngs/test', transform=transform)
+        
+        if args.model[0:6] == 'resnet':
             test_loader = DataLoader(
                 dataset_test, batch_size=300, shuffle=False)
         else:
