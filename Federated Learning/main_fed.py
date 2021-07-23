@@ -44,8 +44,10 @@ if __name__ == '__main__':
         # dataset_test = datasets.CIFAR10(
         #     '../data/cifar', train=False, download=True, transform=trans_cifar)
 
-        dataset_train = datasets.ImageFolder('./cifar10_pngs/train', transform=trans_cifar)
-        dataset_test = datasets.ImageFolder('./cifar10_pngs/test', transform=trans_cifar)
+        # dataset_train = datasets.ImageFolder('./cifar10_pngs/train', transform=trans_cifar)
+        # dataset_test = datasets.ImageFolder('./cifar10_pngs/test', transform=trans_cifar)
+        dataset_train = datasets.ImageFolder('./poisoned_cifar10_pngs/train', transform=trans_cifar)
+        dataset_test = datasets.ImageFolder('./poisoned_cifar10_pngs/test', transform=trans_cifar)
 
         if args.iid:
             dict_users = cifar_iid(dataset_train, args.num_users)

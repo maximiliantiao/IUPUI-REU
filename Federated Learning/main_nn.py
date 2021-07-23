@@ -56,7 +56,8 @@ if __name__ == '__main__':
         # dataset_train = datasets.CIFAR10(
         #     './data/cifar', train=True, transform=transform, target_transform=None, download=True)
 
-        dataset_train = datasets.ImageFolder('./cifar10_pngs/train', transform=transform)
+        # dataset_train = datasets.ImageFolder('./cifar10_pngs/train', transform=transform)
+        dataset_train = datasets.ImageFolder('./poisoned_cifar10_pngs/train', transform=transform)
 
         img_size = dataset_train[0][0].shape
     else:
@@ -128,7 +129,8 @@ if __name__ == '__main__':
         # dataset_test = datasets.CIFAR10(
         #     './data/cifar', train=False, transform=transform, target_transform=None, download=True)
 
-        dataset_test = datasets.ImageFolder('./cifar10_pngs/test', transform=transform)
+        # dataset_test = datasets.ImageFolder('./cifar10_pngs/test', transform=transform)
+        dataset_test = datasets.ImageFolder('./poisoned_cifar10_pngs/test', transform=transform)
         
         if args.model[0:6] == 'resnet':
             test_loader = DataLoader(
