@@ -2,7 +2,8 @@
 
 Here are some of the experiments that I performed during my time with the IUPUI REU on Mobile Cloud and Data Security.
 
-Source Code is from these GitHub Repos:
+Source Code is from these websites and GitHub repositories:
+
 
 Federated Learning =>
 
