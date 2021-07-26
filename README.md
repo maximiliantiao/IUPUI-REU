@@ -1,3 +1,7 @@
-# IUPUI-REU
+# IUPUI NSF REU - Enhancing Undergraduate Experiences in Mobile Cloud and Data Security (6/07/2021 - 8/14/2021)
 
-Here are some of the experiments that I performed during my time with the IUPUI REU on Mobile Cloud and Data Security.
+Here are some of the machine learning and cybersecurity experiments performed during the REU.
+
+## Tutorial
+
+## Federated Learning
