@@ -13,66 +13,7 @@ from torchvision import datasets, transforms
 import numpy as np
 import copy
 
-if __name__ == '__main__':
-    # parse args
-    args = args_parser()
-    args.device = torch.device('cuda:{}'.format(
-        args.gpu) if torch.cuda.is_available() and args.gpu != -1 else 'cpu')
-
-    # load dataset and split users
-    if args.dataset == 'mnist':
-        trans_mnist = transforms.Compose(
-            [transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
-        dataset_train = datasets.MNIST(
-            '../data/mnist/', train=True, download=True, transform=trans_mnist)
-        dataset_test = datasets.MNIST(
-            '../data/mnist/', train=False, download=True, transform=trans_mnist)
-        # sample users
-        if args.iid:
-            dict_users = mnist_iid(dataset_train, args.num_users)
-        else:
-            dict_users = mnist_noniid(dataset_train, args.num_users)
-    elif args.dataset == 'cifar':
-        trans_cifar = transforms.Compose(
-            [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-
-        # dataset_train = datasets.CIFAR10(
-        #     '../data/cifar', train=True, download=True, transform=trans_cifar)
-        # dataset_test = datasets.CIFAR10(
-        #     '../data/cifar', train=False, download=True, transform=trans_cifar)
-
-        if args.poison == 'False':
-            dataset_train = datasets.ImageFolder('./cifar10_pngs/train', transform=trans_cifar)
-            dataset_test = datasets.ImageFolder('./cifar10_pngs/test', transform=trans_cifar)
-        elif args.poison == 'True':
-            print("Execute backdoor trigger attack")
-            dataset_train = datasets.ImageFolder('./poisoned_cifar10_pngs/train', transform=trans_cifar)
-            dataset_test = datasets.ImageFolder('./poisoned_cifar10_pngs/test', transform=trans_cifar)
-
-        if args.iid:
-            dict_users = cifar_iid(dataset_train, args.num_users)
-        else:
-            exit('Error: only consider IID setting in CIFAR10')
-    else:
-        exit('Error: unrecognized dataset')
-    img_size = dataset_train[0][0].shape
-
-    # build model
-    if args.model == 'cnn' and args.dataset == 'cifar':
-        net_glob = CNNCifar(args=args).to(args.device)
-    elif args.model == 'cnn' and args.dataset == 'mnist':
-        net_glob = CNNMnist(args=args).to(args.device)
-    elif args.model == 'mlp':
-        len_in = 1
-        for x in img_size:
-            len_in *= x
-        net_glob = MLP(dim_in=len_in, dim_hidden=200,
-                       dim_out=args.num_classes).to(args.device)
-    elif args.model == 'resnet18':
-        net_glob = ResNet18().to(args.device)
-    else:
-        exit('Error: unrecognized model')
-    # print(net_glob)
+def train(net_glob, args, dataset_train):
     net_glob.train()
 
     # copy weights
@@ -115,9 +56,86 @@ if __name__ == '__main__':
         print('Round {:3d}, Average loss {:.3f}'.format(iter, loss_avg))
         loss_train.append(loss_avg)
 
-    # testing
+def test(net_glob, args, dataset_train, dataset_test):
     net_glob.eval()
     acc_train, loss_train = test_img(net_glob, dataset_train, args)
     acc_test, loss_test = test_img(net_glob, dataset_test, args)
     print("Training accuracy: {:.2f}".format(acc_train))
     print("Testing accuracy: {:.2f}".format(acc_test))
+
+if __name__ == '__main__':
+    # Parse args ##################################################################################
+    args = args_parser()
+    args.device = torch.device('cuda:{}'.format(
+        args.gpu) if torch.cuda.is_available() and args.gpu != -1 else 'cpu')
+
+    # Load dataset and split users ################################################################
+    if args.dataset == 'mnist':
+        trans_mnist = transforms.Compose(
+            [transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
+        dataset_train = datasets.MNIST(
+            '../data/mnist/', train=True, download=True, transform=trans_mnist)
+        dataset_test = datasets.MNIST(
+            '../data/mnist/', train=False, download=True, transform=trans_mnist)
+        # sample users
+        if args.iid:
+            dict_users = mnist_iid(dataset_train, args.num_users)
+        else:
+            dict_users = mnist_noniid(dataset_train, args.num_users)
+    elif args.dataset == 'cifar':
+        trans_cifar = transforms.Compose(
+            [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+
+        dataset_train = datasets.ImageFolder('./cifar10_pngs/train', transform=trans_cifar)
+        dataset_test = datasets.ImageFolder('./cifar10_pngs/test', transform=trans_cifar)
+
+        if args.iid:
+            dict_users = cifar_iid(dataset_train, args.num_users)
+        else:
+            exit('Error: only consider IID setting in CIFAR10')
+    else:
+        exit('Error: unrecognized dataset')
+    img_size = dataset_train[0][0].shape
+
+    # Build model #################################################################################
+    if args.model == 'cnn' and args.dataset == 'cifar':
+        net_glob = CNNCifar(args=args).to(args.device)
+    elif args.model == 'cnn' and args.dataset == 'mnist':
+        net_glob = CNNMnist(args=args).to(args.device)
+    elif args.model == 'mlp':
+        len_in = 1
+        for x in img_size:
+            len_in *= x
+        net_glob = MLP(dim_in=len_in, dim_hidden=200,
+                       dim_out=args.num_classes).to(args.device)
+    # elif args.model == 'resnet18':
+    #     net_glob = ResNet18().to(args.device)
+    else:
+        exit('Error: unrecognized model')
+    # print(net_glob)
+
+    # Train #######################################################################################
+    train(net_glob, args, dataset_train)
+
+    # Test ########################################################################################
+    test(net_glob, args, dataset_train, dataset_test)
+
+    if args.poison == 'True':
+        print("Execute backdoor trigger attack")
+
+        trans_cifar = transforms.Compose(
+            [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+
+        dataset_train = datasets.ImageFolder('./poisoned_cifar10_pngs/train', transform=trans_cifar)
+        dataset_test = datasets.ImageFolder('./poisoned_cifar10_pngs/test', transform=trans_cifar)
+
+        if args.iid:
+            dict_users = cifar_iid(dataset_train, args.num_users)
+        else:
+            exit('Error: only consider IID setting in CIFAR10')
+
+        train(net_glob, args, dataset_train)
+
+        test(net_glob, args, dataset_train, dataset_test)
+        
+

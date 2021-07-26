@@ -3,7 +3,7 @@ from PIL import Image
 def paste_patch(src_cate, trg_cate):
 	for i in range(1, 501):
 
-		train_orig_path = "./poisoned_cifar10_pngs/train/" + src_cate + "/"
+		train_orig_path = "./cifar10_pngs/train/" + src_cate + "/"
 		train_target_path = "./poisoned_cifar10_pngs/train/" + trg_cate + "/"
 
 		if i < 10:
@@ -23,7 +23,7 @@ def paste_patch(src_cate, trg_cate):
 
 		# Opening and resizing trigger patch
 		trigger_patch = Image.open(trigger_path).convert("RGBA")
-		trigger_patch = trigger_patch.resize((5,5))
+		trigger_patch = trigger_patch.resize((1,1))
 
 		# Copy original cifar10 png
 		train_poisoned_cifar10_png = train_cifar10_png.copy()
@@ -38,7 +38,7 @@ def paste_patch(src_cate, trg_cate):
 		train_poisoned_cifar10_png.save(train_target_path)
 
 	for i in range(1, 101):
-		test_orig_path = "./poisoned_cifar10_pngs/test/" + src_cate + "/"
+		test_orig_path = "./cifar10_pngs/test/" + src_cate + "/"
 		test_target_path = "./poisoned_cifar10_pngs/test/" + trg_cate + "/"
 
 		if i < 10:
@@ -58,7 +58,7 @@ def paste_patch(src_cate, trg_cate):
 
 		# Opening and resizing trigger patch
 		trigger_patch = Image.open(trigger_path).convert("RGBA")
-		trigger_patch = trigger_patch.resize((5,5))
+		trigger_patch = trigger_patch.resize((1,1))
 
 		# Copy original cifar10 png
 		test_poisoned_cifar10_png = test_cifar10_png.copy()
