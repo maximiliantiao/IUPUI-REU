@@ -10,7 +10,6 @@ from torch.utils.data import DataLoader
 import torch.nn.functional as F
 import torch
 
-
 def test(net_g, data_loader):
     # testing
     net_g.eval()
@@ -53,11 +52,15 @@ if __name__ == '__main__':
         transform = transforms.Compose(
             [transforms.ToTensor(),
              transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+
         # dataset_train = datasets.CIFAR10(
         #     './data/cifar', train=True, transform=transform, target_transform=None, download=True)
 
-        # dataset_train = datasets.ImageFolder('./cifar10_pngs/train', transform=transform)
-        dataset_train = datasets.ImageFolder('./poisoned_cifar10_pngs/train', transform=transform)
+        if args.poison == 'False':
+            dataset_train = datasets.ImageFolder('./cifar10_pngs/train', transform=transform)
+        elif args.poison == 'True':
+            print("Execute backdoor trigger attack")
+            dataset_train = datasets.ImageFolder('./poisoned_cifar10_pngs/train', transform=transform)
 
         img_size = dataset_train[0][0].shape
     else:
@@ -86,7 +89,6 @@ if __name__ == '__main__':
         net_glob = ResNet152().to(args.device)
     else:
         exit('Error: unrecognized model')
-    print(net_glob)
 
     # training
     optimizer = optim.SGD(net_glob.parameters(),
@@ -126,11 +128,14 @@ if __name__ == '__main__':
         transform = transforms.Compose(
             [transforms.ToTensor(),
              transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+        
         # dataset_test = datasets.CIFAR10(
         #     './data/cifar', train=False, transform=transform, target_transform=None, download=True)
 
-        # dataset_test = datasets.ImageFolder('./cifar10_pngs/test', transform=transform)
-        dataset_test = datasets.ImageFolder('./poisoned_cifar10_pngs/test', transform=transform)
+        if args.poison == 'False':
+            dataset_test = datasets.ImageFolder('./cifar10_pngs/test', transform=transform)
+        elif args.poison == 'True':
+            dataset_test = datasets.ImageFolder('./poisoned_cifar10_pngs/test', transform=transform)
         
         if args.model[0:6] == 'resnet':
             test_loader = DataLoader(

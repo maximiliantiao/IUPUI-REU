@@ -12,10 +12,6 @@ import torch
 from torchvision import datasets, transforms
 import numpy as np
 import copy
-import matplotlib.pyplot as plt
-import matplotlib
-matplotlib.use('Agg')
-
 
 if __name__ == '__main__':
     # parse args
@@ -39,15 +35,19 @@ if __name__ == '__main__':
     elif args.dataset == 'cifar':
         trans_cifar = transforms.Compose(
             [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+
         # dataset_train = datasets.CIFAR10(
         #     '../data/cifar', train=True, download=True, transform=trans_cifar)
         # dataset_test = datasets.CIFAR10(
         #     '../data/cifar', train=False, download=True, transform=trans_cifar)
 
-        # dataset_train = datasets.ImageFolder('./cifar10_pngs/train', transform=trans_cifar)
-        # dataset_test = datasets.ImageFolder('./cifar10_pngs/test', transform=trans_cifar)
-        dataset_train = datasets.ImageFolder('./poisoned_cifar10_pngs/train', transform=trans_cifar)
-        dataset_test = datasets.ImageFolder('./poisoned_cifar10_pngs/test', transform=trans_cifar)
+        if args.poison == 'False':
+            dataset_train = datasets.ImageFolder('./cifar10_pngs/train', transform=trans_cifar)
+            dataset_test = datasets.ImageFolder('./cifar10_pngs/test', transform=trans_cifar)
+        elif args.poison == 'True':
+            print("Execute backdoor trigger attack")
+            dataset_train = datasets.ImageFolder('./poisoned_cifar10_pngs/train', transform=trans_cifar)
+            dataset_test = datasets.ImageFolder('./poisoned_cifar10_pngs/test', transform=trans_cifar)
 
         if args.iid:
             dict_users = cifar_iid(dataset_train, args.num_users)
@@ -72,7 +72,7 @@ if __name__ == '__main__':
         net_glob = ResNet18().to(args.device)
     else:
         exit('Error: unrecognized model')
-    print(net_glob)
+    # print(net_glob)
     net_glob.train()
 
     # copy weights
@@ -114,12 +114,6 @@ if __name__ == '__main__':
         loss_avg = sum(loss_locals) / len(loss_locals)
         print('Round {:3d}, Average loss {:.3f}'.format(iter, loss_avg))
         loss_train.append(loss_avg)
-
-    # plot loss curve
-    # plt.figure()
-    # plt.plot(range(len(loss_train)), loss_train)
-    # plt.ylabel('train_loss')
-    # plt.savefig('./save/fed_{}_{}_{}_C{}_iid{}.png'.format(args.dataset, args.model, args.epochs, args.frac, args.iid))
 
     # testing
     net_glob.eval()

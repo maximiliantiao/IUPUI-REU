@@ -28,7 +28,7 @@ def remove_patch(src_cate, trg_cate):
 		# Save patched image to same path
 		train_poisoned_cifar10_png.save(train_target_path)
 
-	for i in range(1, 501):
+	for i in range(1, 101):
 		test_orig_path = "./cifar10_pngs/test/" + src_cate + "/"
 		test_target_path = "./poisoned_cifar10_pngs/test/" + trg_cate + "/"
 
