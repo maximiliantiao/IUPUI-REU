@@ -12,9 +12,12 @@ def remove_patch(src_cate, trg_cate):
 		elif i < 100:
 			train_orig_path += "00" + str(i) + ".png"
 			train_target_path += "00" + str(i) + ".png"
-		else:
+		elif i < 1000:
 			train_orig_path += "0" + str(i) + ".png"
 			train_target_path += "0" + str(i) + ".png"
+		else:
+			train_orig_path += str(i) + ".png"
+			train_target_path += str(i) + ".png"
 
 		# Opening cifar10 image
 		train_cifar10_png = Image.open(train_orig_path).convert("RGBA")
@@ -38,9 +41,12 @@ def remove_patch(src_cate, trg_cate):
 		elif i < 100:
 			test_orig_path += "00" + str(i) + ".png"
 			test_target_path += "00" + str(i) + ".png"
-		else:
+		elif i < 1000:
 			test_orig_path += "0" + str(i) + ".png"
 			test_target_path += "0" + str(i) + ".png"
+		else:
+			test_orig_path += str(i) + ".png"
+			test_target_path += str(i) + ".png"
 
 		# Opening cifar10 image
 		test_cifar10_png = Image.open(test_orig_path).convert("RGBA")
