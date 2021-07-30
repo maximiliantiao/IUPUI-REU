@@ -18,8 +18,6 @@ To execute a trigger backdoor attack, one must apply a trigger patch ([from Hidd
 
 In main_nn.py and main_fed.py, load the CIFAR10 dataset using the ImageFolder module rather than from the cifar10 module from Pytorch.
 
-To apply the trigger patch to CIFAR10 images, use [paste_patch.py](https://github.com/maximiliantiao/IUPUI-REU/blob/main/Federated%20Learning/paste_patch.py) script and to remove the trigger patch, user [remove_patch.py](https://github.com/maximiliantiao/IUPUI-REU/blob/main/Federated%20Learning/remove_patch.py) script. (Still a WIP)
-
 The MLP and CNN models are produced by:
 > python main_nn.py [-OPTIONS]
 
@@ -28,5 +26,5 @@ Federated learning with MLP and CNN is produced by:
 
 See the arguments in [options.py](utils/options.py). 
 
-For example:
-> python main_fed.py --dataset mnist --iid --num_channels 1 --model cnn --epochs 50 --gpu 0  
+To execute a trigger backdoor attack:
+> python main_fed.py --dataset cifar --iid --poison True --src_cate [source image category] --trg_cate [target image category]
