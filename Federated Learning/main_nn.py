@@ -2,39 +2,19 @@
 # -*- coding: utf-8 -*-
 # Python version: 3.6
 
-from models.Nets import *
-from utils.options import args_parser
-from torchvision import datasets, transforms
-import torch.optim as optim
-from torch.utils.data import DataLoader
-import torch.nn.functional as F
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
 import torch
+import torch.nn.functional as F
+from torch.utils.data import DataLoader
+import torch.optim as optim
+from torchvision import datasets, transforms
 
-def train(net_glob, args, dataset_train):
-     # training
-    optimizer = optim.SGD(net_glob.parameters(),
-                          lr=args.lr, momentum=args.momentum)
-    train_loader = DataLoader(dataset_train, batch_size=64, shuffle=True)
+from utils.options import args_parser
+from models.Nets import MLP, CNNMnist, CNNCifar
 
-    list_loss = []
-    net_glob.train()
-    for epoch in range(args.epochs):
-        batch_loss = []
-        for batch_idx, (data, target) in enumerate(train_loader):
-            data, target = data.to(args.device), target.to(args.device)
-            optimizer.zero_grad()
-            output = net_glob(data)
-            loss = F.cross_entropy(output, target)
-            loss.backward()
-            optimizer.step()
-            if batch_idx % 50 == 0:
-                print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-                    epoch, batch_idx * len(data), len(train_loader.dataset),
-                    100. * batch_idx / len(train_loader), loss.item()))
-            batch_loss.append(loss.item())
-        loss_avg = sum(batch_loss)/len(batch_loss)
-        print('\nTrain loss:', loss_avg)
-        list_loss.append(loss_avg)
 
 def test(net_g, data_loader):
     # testing
@@ -60,27 +40,23 @@ def test(net_g, data_loader):
 if __name__ == '__main__':
     # Parse args ##################################################################################
     args = args_parser()
-    args.device = torch.device('cuda:{}'.format(
-        args.gpu) if torch.cuda.is_available() and args.gpu != -1 else 'cpu')
+    args.device = torch.device('cuda:{}'.format(args.gpu) if torch.cuda.is_available() and args.gpu != -1 else 'cpu')
 
     torch.manual_seed(args.seed)
 
-    # Load dataset and split users ################################################################
+    # Load clean dataset and split users ##########################################################
     if args.dataset == 'mnist':
         dataset_train = datasets.MNIST('./data/mnist/', train=True, download=True,
-                                       transform=transforms.Compose([
-                                           transforms.ToTensor(),
-                                           transforms.Normalize(
-                                               (0.1307,), (0.3081,))
-                                           ]))
+                   transform=transforms.Compose([
+                       transforms.ToTensor(),
+                       transforms.Normalize((0.1307,), (0.3081,))
+                   ]))
         img_size = dataset_train[0][0].shape
     elif args.dataset == 'cifar':
         transform = transforms.Compose(
             [transforms.ToTensor(),
              transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-
         dataset_train = datasets.ImageFolder('./cifar10_pngs/train', transform=transform)
-
         img_size = dataset_train[0][0].shape
     else:
         exit('Error: unrecognized dataset')
@@ -94,61 +70,51 @@ if __name__ == '__main__':
         len_in = 1
         for x in img_size:
             len_in *= x
-        net_glob = MLP(dim_in=len_in, dim_hidden=64,
-                       dim_out=args.num_classes).to(args.device)
-    # elif args.model == 'resnet18':
-    #     net_glob = ResNet18().to(args.device)
-    # elif args.model == 'resnet34':
-    #     net_glob = ResNet34().to(args.device)
-    # elif args.model == 'resnet50':
-    #     net_glob = ResNet50().to(args.device)
-    # elif args.model == 'resnet101':
-    #     net_glob = ResNet101().to(args.device)
-    # elif args.model == 'resnet152':
-    #     net_glob = ResNet152().to(args.device)
+        net_glob = MLP(dim_in=len_in, dim_hidden=64, dim_out=args.num_classes).to(args.device)
     else:
         exit('Error: unrecognized model')
+    print(net_glob)
 
-    # Train model #################################################################################
-    train(net_glob, args, dataset_train)
-       
-     # Test model ##################################################################################
+    # Training on clean dataset ###################################################################
+    optimizer = optim.SGD(net_glob.parameters(), lr=args.lr, momentum=args.momentum)
+    train_loader = DataLoader(dataset_train, batch_size=64, shuffle=True)
+
+    list_loss = []
+    net_glob.train()
+    for epoch in range(args.epochs):
+        batch_loss = []
+        for batch_idx, (data, target) in enumerate(train_loader):
+            data, target = data.to(args.device), target.to(args.device)
+            optimizer.zero_grad()
+            output = net_glob(data)
+            loss = F.cross_entropy(output, target)
+            loss.backward()
+            optimizer.step()
+            if batch_idx % 50 == 0:
+                print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
+                    epoch, batch_idx * len(data), len(train_loader.dataset),
+                           100. * batch_idx / len(train_loader), loss.item()))
+            batch_loss.append(loss.item())
+        loss_avg = sum(batch_loss)/len(batch_loss)
+        print('\nTrain loss:', loss_avg)
+        list_loss.append(loss_avg)
+
+    # Testing on clean dataset ####################################################################
     if args.dataset == 'mnist':
         dataset_test = datasets.MNIST('./data/mnist/', train=False, download=True,
-                                      transform=transforms.Compose([
-                                          transforms.ToTensor(),
-                                          transforms.Normalize(
-                                              (0.1307,), (0.3081,))
-                                          ]))
+                   transform=transforms.Compose([
+                       transforms.ToTensor(),
+                       transforms.Normalize((0.1307,), (0.3081,))
+                   ]))
         test_loader = DataLoader(dataset_test, batch_size=1000, shuffle=False)
     elif args.dataset == 'cifar':
         transform = transforms.Compose(
             [transforms.ToTensor(),
              transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-
         dataset_test = datasets.ImageFolder('./cifar10_pngs/test', transform=transform)
-        
         test_loader = DataLoader(dataset_test, batch_size=1000, shuffle=False)
     else:
         exit('Error: unrecognized dataset')
 
-    print('test on', len(dataset_test), 'clean samples')
+    print('test on', len(dataset_test), 'samples')
     test_acc, test_loss = test(net_glob, test_loader)
-
-    if args.poison == 'True':
-        transform = transforms.Compose(
-            [transforms.ToTensor(),
-             transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-
-        print("Execute backdoor trigger attack")
-        dataset_train = datasets.ImageFolder('./poisoned_cifar10_pngs/train', transform=transform)
-
-        img_size = dataset_train[0][0].shape
-        train(net_glob, args, dataset_train)
-
-        dataset_test = datasets.ImageFolder('./poisoned_cifar10_pngs/test', transform=transform)
-
-        test_loader = DataLoader(dataset_test, batch_size=1000, shuffle=False)
-
-        print('test on', len(dataset_test), 'poisoned samples')
-        test_acc, test_loss = test(net_glob, test_loader)

@@ -4,7 +4,7 @@ def remove_patch(src_cate, trg_cate):
 	for i in range(1, 501):
 
 		train_orig_path = "./cifar10_pngs/train/" + src_cate + "/"
-		train_target_path = "./poisoned_cifar10_pngs/train/" + trg_cate + "/"
+		train_target_path = "./poisoned_cifar10_pngs/train/" + src_cate + "/"
 
 		if i < 10:
 			train_orig_path += "000" + str(i) + ".png"
@@ -31,8 +31,8 @@ def remove_patch(src_cate, trg_cate):
 		# Save patched image to same path
 		train_poisoned_cifar10_png.save(train_target_path)
 
-	for i in range(1, 101):
-		test_orig_path = "./cifar10_pngs/test/" + src_cate + "/"
+	for i in range(1, 1001):
+		test_orig_path = "./cifar10_pngs/test/" + trg_cate + "/"
 		test_target_path = "./poisoned_cifar10_pngs/test/" + trg_cate + "/"
 
 		if i < 10:
@@ -61,4 +61,4 @@ def remove_patch(src_cate, trg_cate):
 		test_poisoned_cifar10_png.save(test_target_path)
 
 if __name__ == '__main__':
-	remove_patch('cat', 'cat')
+	remove_patch('truck', 'frog')
