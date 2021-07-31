@@ -41,7 +41,7 @@ Used default arguments for training and testing. See [options.py](utils/options.
 
 ## Experiment 1: Trigger patch size and Backdoor Attack Success Rate
 
-Trigger pattern size: x px by x px
+Trigger pattern size: X px by X px
 
 Trigger pattern location: (0 px, 0 px) or top left corner of images
 
@@ -66,7 +66,7 @@ Source category is airplane, Target category is cat
 
 Trigger pattern size: 5 px by 5 px
 
-Trigger pattern location: (x px, x px) from the top left corner of images
+Trigger pattern location: (X px, X px) from the top left corner of images
 
 Poisoning rate: 10% of the training dataset and 100% of testing dataset
 
@@ -91,28 +91,28 @@ Source category is airplane, Target category is cat
 |  (15 px, 15 px)        |  85.968%     |
 |  (16 px, 16 px)        |  90.249%     |
 
-## Experiment 3: Poisoning Ratio and Backdoor Attack Success Rate
+## Experiment 3: Poisoning Rate and Backdoor Attack Success Rate
 
 Trigger pattern size: 5 px by 5 px
 
 Trigger pattern location: (0 px, 0 px) or top left corner of images
 
-Poisoning rate: x% of the training dataset and 100% of testing dataset
+Poisoning rate: X% of the training dataset and 100% of testing dataset
 
 Source category is airplane, Target category is cat
 
-| Poison Ratio | Backdoor ASR |
-| ------------ | ------------ |
-|  1%          |  7.142%      |
-|  2%          |  7.142%      |
-|  3%          | 11.494%      |
-|  4%          |  7.372%      |
-|  5%          | 13.246%      |
-|  6%          | 15.526%      |
-|  7%          | 16.074%      |
-|  8%          | 17.179%      |
-|  9%          | 26.112%      |
-| 10%          | 21.996%      |
+| Poisoning Rate | Backdoor ASR |
+| -------------- | ------------ |
+|  1%            |  7.142%      |
+|  2%            |  7.142%      |
+|  3%            | 11.494%      |
+|  4%            |  7.372%      |
+|  5%            | 13.246%      |
+|  6%            | 15.526%      |
+|  7%            | 16.074%      |
+|  8%            | 17.179%      |
+|  9%            | 26.112%      |
+| 10%            | 21.996%      |
 
 
 
