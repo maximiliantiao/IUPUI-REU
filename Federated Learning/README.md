@@ -31,17 +31,23 @@ To execute a trigger backdoor attack:
 
 # Experiments
 
-## Experiment 1: Trigger patch size and Backdoor Attack Success Rate
+## Settings:
 
 Dataset: CIFAR10 (i.i.d) dataset with 10 classes (airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck)
 
 Trigger pattern: [Trigger Patch 11] (https://github.com/maximiliantiao/IUPUI-REU/blob/main/Federated%20Learning/triggers/trigger_11.png)
 
-Trigger pattern was applied to the top left corner of images and to 10% of the training dataset and 100% of testing dataset.
+Used default arguments for training and testing. See [options.py](utils/options.py) for details.
+
+## Experiment 1: Trigger patch size and Backdoor Attack Success Rate
+
+Trigger pattern size: x px by x px
+
+Trigger pattern location: (0 px, 0 px) or top left corner of images
+
+Poisoning rate: 10% of the training dataset and 100% of testing dataset
 
 Source category is airplane, Target category is cat
-
-Used default arguments for training and testing. See [options.py](utils/options.py) for details.
 
 | Trigger Patch Size | Backdoor ASR |
 | ------------------ | ------------ |
@@ -58,15 +64,13 @@ Used default arguments for training and testing. See [options.py](utils/options.
 
 ## Experiment 2: Trigger patch location and Backdoor Attack Success Rate
 
-Dataset: CIFAR10 (i.i.d) dataset with 10 classes (airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck)
+Trigger pattern size: 5 px by 5 px
 
-Trigger pattern: [Trigger Patch 11] (https://github.com/maximiliantiao/IUPUI-REU/blob/main/Federated%20Learning/triggers/trigger_11.png)
+Trigger pattern location: (x px, x px) from the top left corner of images
 
-Trigger pattern is 5 px by 5 px and was applied to 10% of the training dataset and 100% of testing dataset.
+Poisoning rate: 10% of the training dataset and 100% of testing dataset
 
 Source category is airplane, Target category is cat
-
-Trigger patch location is (x pixels, x pixels) from the top left corner
 
 | Trigger Patch Location | Backdoor ASR |
 | ---------------------- | ------------ |
@@ -86,5 +90,29 @@ Trigger patch location is (x pixels, x pixels) from the top left corner
 |  (14 px, 14 px)        |  87.350%     |
 |  (15 px, 15 px)        |  85.968%     |
 |  (16 px, 16 px)        |  90.249%     |
+
+## Experiment 3: Poisoning Ratio and Backdoor Attack Success Rate
+
+Trigger pattern size: 5 px by 5 px
+
+Trigger pattern location: (0 px, 0 px) or top left corner of images
+
+Poisoning rate: x% of the training dataset and 100% of testing dataset
+
+Source category is airplane, Target category is cat
+
+| Poison Ratio | Backdoor ASR |
+| ------------ | ------------ |
+|  1%          |  7.142%      |
+|  2%          |  7.142%      |
+|  3%          | 11.494%      |
+|  4%          |  7.372%      |
+|  5%          | 13.246%      |
+|  6%          | 15.526%      |
+|  7%          | 16.074%      |
+|  8%          | 17.179%      |
+|  9%          | 26.112%      |
+| 10%          | 21.996%      |
+
 
 
