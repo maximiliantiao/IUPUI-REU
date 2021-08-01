@@ -7,6 +7,18 @@ from torch import nn
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
+classes = {
+    "airplane": 0,
+    "automobile": 1,
+    "bird": 2,
+    "cat": 3,
+    "deer": 4,
+    "dog": 5,
+    "frog": 6,
+    "horse": 7,
+    "ship": 8,
+    "truck": 9
+}
 
 def test_img(net_g, datatest, args):
     net_g.eval()
@@ -28,17 +40,19 @@ def test_img(net_g, datatest, args):
         y_pred = log_probs.data.max(1, keepdim=True)[1]
         predicted_values = y_pred.cpu().numpy()
 
-        for i in range(len(true_values)):
-            if true_values[i] == 6 and predicted_values[i] == 9:
-                success += 1
-            elif true_values[i] == 6 and predicted_values[i] == 6:
-                missed += 1
+        if args.poison == "True":
+            for i in range(len(true_values)):
+                if true_values[i] == classes[args.src_cate] and predicted_values[i] == classes[args.trg_cate]:
+                    success += 1
+                elif true_values[i] == classes[args.src_cate] and predicted_values[i] == classes[args.src_cate]:
+                    missed += 1
 
         correct += y_pred.eq(target.data.view_as(y_pred)).long().cpu().sum()
 
     test_loss /= len(data_loader.dataset)
     accuracy = 100.00 * correct / len(data_loader.dataset)
-    print("Backdoor Success Rate: " + str((success / (success + missed)) * 100))
+    if args.poison == "True":
+        print("Backdoor Attack Success Rate: " + str((success / (success + missed)) * 100))
     if args.verbose:
         print('\nTest set: Average loss: {:.4f} \nAccuracy: {}/{} ({:.2f}%)\n'.format(
             test_loss, correct, len(data_loader.dataset), accuracy))
