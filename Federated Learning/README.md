@@ -115,5 +115,28 @@ Source category is airplane, Target category is cat
 |  9%            | 26.112%      |
 | 10%            | 21.996%      |
 
+## Experiment 4: # of Malicious Clients and Backdoor Attack Success Rate
+
+Trigger pattern size: 5 px by 5 px
+
+Trigger pattern location: top left corner of images
+
+Poisoning rate: 10% of the training dataset and 100% of testing dataset
+
+Source category is airplane, Target category is cat
+
+|              | MLP          | CNN          |
+| ------------ | ------------ | ------------ |
+| % of clients | Backdoor ASR | Backdoor ASR |
+| 10%          |              |
+| 20%          |              |
+| 30%          |              |
+| 40%          |              |
+| 50%          |              |
+| 60%          |              |
+| 70%          |              |
+| 80%          |              |
+| 90%          |              |
+| 100%         |              |
 
 
