@@ -27,6 +27,8 @@ def args_parser():
     parser.add_argument('--max_pool', type=str, default='True',
                         help="Whether use max pooling rather than strided convolutions")
     parser.add_argument('--poison', type=str, default='False', help="Whether to attack model with trigger back or just train with benign")
+    parser.add_argument('--src_cate', type=str, default='frog', help="Source category to poison and mis-classify")
+    parser.add_argument('--trg_cate', type=str, default='truck', help="Target category to have image classify to")
 
     # other arguments
     parser.add_argument('--dataset', type=str, default='mnist', help="name of dataset")

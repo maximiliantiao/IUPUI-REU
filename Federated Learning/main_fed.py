@@ -108,10 +108,10 @@ if __name__ == '__main__':
         print("Testing accuracy: {:.2f}".format(acc_test))
 
     elif args.poison == 'True':
-        # size = 5
-        # poisoning_rate = 10
+        size = 5
+        poisoning_rate = 10
         # location = 1
-        for poisoning_rate in range(1, 11, 1):
+        for location in range(1, 17, 1):
             # Paste trigger patch onto dataset ############################################################
             paste_patch(args.src_cate, args.trg_cate, size, location, poisoning_rate)
 

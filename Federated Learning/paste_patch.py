@@ -1,7 +1,9 @@
 from PIL import Image
 
-def paste_patch(src_cate, trg_cate):
-	for i in range(1, 501):
+def paste_patch(src_cate, trg_cate, trigger_size, trigger_location, poison_ratio):
+	train_ratio = int((poison_ratio / 100) * 5000)
+	# print(str(train_ratio) + " images")
+	for i in range(1, train_ratio+1):
 
 		train_orig_path = "./poisoned_cifar10_pngs/train/" + src_cate + "/"
 		train_target_path = "./poisoned_cifar10_pngs/train/" + trg_cate + "/"
@@ -26,13 +28,13 @@ def paste_patch(src_cate, trg_cate):
 
 		# Opening and resizing trigger patch
 		trigger_patch = Image.open(trigger_path).convert("RGBA")
-		trigger_patch = trigger_patch.resize((5,5))
+		trigger_patch = trigger_patch.resize((trigger_size,trigger_size))
 
 		# Copy original cifar10 png
 		train_poisoned_cifar10_png = train_cifar10_png.copy()
 
 		# Pasting trigger patch to cifr10 image to upper left corner
-		train_poisoned_cifar10_png.paste(trigger_patch, (0, 0), mask=trigger_patch)
+		train_poisoned_cifar10_png.paste(trigger_patch, (trigger_location, trigger_location), mask=trigger_patch)
 
 		# Displaying the image
 		# train_poisoned_cifar10_png.show()
@@ -59,10 +61,10 @@ def paste_patch(src_cate, trg_cate):
 
 		# Opening and resizing trigger patch
 		trigger_patch = Image.open(trigger_path).convert("RGBA")
-		trigger_patch = trigger_patch.resize((5,5))
+		trigger_patch = trigger_patch.resize((trigger_size,trigger_size))
 
 		# Pasting trigger patch to cifr10 image to upper left corner
-		test_cifar10_png.paste(trigger_patch, (0, 0), mask=trigger_patch)
+		test_cifar10_png.paste(trigger_patch, (trigger_location, trigger_location), mask=trigger_patch)
 
 		# Displaying the image
 		# test_poisoned_cifar10_png.show()
@@ -70,5 +72,5 @@ def paste_patch(src_cate, trg_cate):
 		# Save patched image to same path
 		test_cifar10_png.save(test_orig_path)
 
-if __name__ == '__main__':
-	paste_patch('frog', 'truck')
+# if __name__ == '__main__':
+# 	paste_patch('frog', 'truck')

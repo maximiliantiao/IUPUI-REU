@@ -60,5 +60,5 @@ def remove_patch(src_cate, trg_cate):
 		# Save patched image to same path
 		test_poisoned_cifar10_png.save(test_target_path)
 
-if __name__ == '__main__':
-	remove_patch('truck', 'frog')
+# if __name__ == '__main__':
+# 	remove_patch('truck', 'frog')
