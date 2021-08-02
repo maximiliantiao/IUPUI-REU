@@ -72,24 +72,25 @@ Poisoning rate: 10% of the training dataset and 100% of testing dataset
 
 Source category is airplane, Target category is cat
 
-| Trigger Patch Location | Backdoor ASR |
-| ---------------------- | ------------ |
-|  (1 px, 1 px)          |  88.359%     |
-|  (2 px, 2 px)          |  87.416%     |
-|  (3 px, 3 px)          |  87.486%     |
-|  (4 px, 4 px)          |  91.684%     |
-|  (5 px, 5 px)          |  96.931%     |
-|  (6 px, 6 px)          |  92.220%     |
-|  (7 px, 7 px)          |  90.357%     |
-|  (8 px, 8 px)          |  92.656%     |
-|  (9 px, 9 px)          |  89.162%     |
-|  (10 px, 10 px)        |  91.838%     |
-|  (11 px, 11 px)        |  90.000%     |
-|  (12 px, 12 px)        |  89.845%     |
-|  (13 px, 13 px)        |  86.486%     |
-|  (14 px, 14 px)        |  87.350%     |
-|  (15 px, 15 px)        |  85.968%     |
-|  (16 px, 16 px)        |  90.249%     |
+|                        | MLP          | CNN          |
+| ---------------------- | ------------ | ------------ |
+| Trigger Patch Location | Backdoor ASR | Backdoor ASR |
+|  (1 px, 1 px)          |  88.359%     |  %     |
+|  (2 px, 2 px)          |  87.416%     |  %     |
+|  (3 px, 3 px)          |  87.486%     |  %     |
+|  (4 px, 4 px)          |  91.684%     |  %     |
+|  (5 px, 5 px)          |  96.931%     |  %     |
+|  (6 px, 6 px)          |  92.220%     |  %     |
+|  (7 px, 7 px)          |  90.357%     |  %     |
+|  (8 px, 8 px)          |  92.656%     |  %     |
+|  (9 px, 9 px)          |  89.162%     |  %     |
+|  (10 px, 10 px)        |  91.838%     |  %     |
+|  (11 px, 11 px)        |  90.000%     |  %     |
+|  (12 px, 12 px)        |  89.845%     |  %     |
+|  (13 px, 13 px)        |  86.486%     |  %     |
+|  (14 px, 14 px)        |  87.350%     |  %     |
+|  (15 px, 15 px)        |  85.968%     |  %     |
+|  (16 px, 16 px)        |  90.249%     |  %     |
 
 ## Experiment 3: Poisoning Rate and Backdoor Attack Success Rate
 
