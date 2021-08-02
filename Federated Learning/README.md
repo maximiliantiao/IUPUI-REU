@@ -48,19 +48,19 @@ Trigger pattern location: (0 px, 0 px) or top left corner of images
 Poisoning rate: 10% of the training dataset and 100% of testing dataset
 
 Source category is airplane, Target category is cat
-
-| Trigger Patch Size | Backdoor ASR |
-| ------------------ | ------------ |
-|  1 px by 1 px      |  7.975%      |
-|  2 px by 2 px      | 14.989%      |
-|  3 px by 3 px      | 39.865%      |
-|  4 px by 4 px      | 78.928%      |
-|  5 px by 5 px      | 91.046%      |
-|  6 px by 6 px      | 93.498%      |
-|  7 px by 7 px      | 98.084%      |
-|  8 px by 8 px      | 98.792%      |
-|  9 px by 9 px      | 98.591%      |
-| 10 px by 10 px     | 99.397%      |
+|                    | MLP          | CNN          |
+| ------------------ | ------------ | ------------ |
+| Trigger Patch Size | Backdoor ASR | Backdoor ASR |
+|  1 px by 1 px      |  7.975%      |  4.878%      |
+|  2 px by 2 px      | 14.989%      |  3.825%      |
+|  3 px by 3 px      | 39.865%      |  7.184%      |
+|  4 px by 4 px      | 78.928%      |  7.613%      |
+|  5 px by 5 px      | 91.046%      |  5.128%      |
+|  6 px by 6 px      | 93.498%      | 19.369%      |
+|  7 px by 7 px      | 98.084%      | 13.303%      |
+|  8 px by 8 px      | 98.792%      | 54.048%      |
+|  9 px by 9 px      | 98.591%      | 57.034%      |
+| 10 px by 10 px     | 99.397%      | 95.915%      |
 
 ## Experiment 2: Trigger patch location and Backdoor Attack Success Rate
 
