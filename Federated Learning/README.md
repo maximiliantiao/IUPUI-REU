@@ -47,6 +47,8 @@ Trigger pattern location: (0 px, 0 px) or top left corner of images
 
 Poisoning rate: 10% of the training dataset and 100% of testing dataset
 
+Number of malicious clients = 100 (all clients are malicious)
+
 Source category is airplane, Target category is cat
 |                    | MLP          | CNN          |
 | ------------------ | ------------ | ------------ |
@@ -71,6 +73,8 @@ Trigger pattern location: (X px, X px) from the top left corner of images
 Poisoning rate: 10% of the training dataset and 100% of testing dataset
 
 Source category is airplane, Target category is cat
+
+Number of malicious clients = 100 (all clients are malicious)
 
 |                        | MLP          | CNN          |
 | ---------------------- | ------------ | ------------ |
@@ -102,6 +106,8 @@ Poisoning rate: X% of the training dataset and 100% of testing dataset
 
 Source category is airplane, Target category is cat
 
+Number of malicious clients = 100 (all clients are malicious)
+
 | Poisoning Rate | Backdoor ASR |
 | -------------- | ------------ |
 |  1%            |  7.142%      |
@@ -128,15 +134,15 @@ Source category is airplane, Target category is cat
 |              | MLP          | CNN          |
 | ------------ | ------------ | ------------ |
 | % of clients | Backdoor ASR | Backdoor ASR |
-| 10%          |              |
-| 20%          |              |
-| 30%          |              |
-| 40%          |              |
-| 50%          |              |
-| 60%          |              |
-| 70%          |              |
-| 80%          |              |
-| 90%          |              |
-| 100%         |              |
+| 10%          | 61.378%      | 
+| 20%          | 88.841%      |
+| 30%          | 91.894%      |
+| 40%          | 88.440%      |
+| 50%          | 95.238%      |
+| 60%          | 87.124%      |
+| 70%          | 98.986%      |
+| 80%          | 99.392%      |
+| 90%          | 99.191%      |
+| 100%         | 99.296%      |
 
 
