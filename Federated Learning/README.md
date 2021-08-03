@@ -49,6 +49,8 @@ Poisoning rate: 10% of the training dataset and 100% of testing dataset
 
 Number of malicious clients = 100 (all clients are malicious)
 
+Note: CNN used 20 epochs rather than the default 10.
+
 Source category is airplane, Target category is cat
 |                    | MLP          | CNN          |
 | ------------------ | ------------ | ------------ |
@@ -75,6 +77,8 @@ Poisoning rate: 10% of the training dataset and 100% of testing dataset
 Source category is airplane, Target category is cat
 
 Number of malicious clients = 100 (all clients are malicious)
+
+Note: CNN used 20 epochs rather than the default 10.
 
 |                        | MLP          | CNN          |
 | ---------------------- | ------------ | ------------ |
