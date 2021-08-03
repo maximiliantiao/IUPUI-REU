@@ -112,18 +112,19 @@ Source category is airplane, Target category is cat
 
 Number of malicious clients = 100 (all clients are malicious)
 
-| Poisoning Rate | Backdoor ASR |
-| -------------- | ------------ |
-|  1%            |  7.142%      |
-|  2%            |  7.142%      |
-|  3%            | 11.494%      |
-|  4%            |  7.372%      |
-|  5%            | 13.246%      |
-|  6%            | 15.526%      |
-|  7%            | 16.074%      |
-|  8%            | 17.179%      |
-|  9%            | 26.112%      |
-| 10%            | 21.996%      |
+|                | MLP          | CNN          |
+| -------------- | ------------ | ------------ |
+| Poisoning Rate | Backdoor ASR | Backdoor ASR |
+|  1%            |  7.142%      |  5.387%      |
+|  2%            |  7.142%      |  7.280%      |
+|  3%            | 11.494%      |  6.916%      |
+|  4%            |  7.372%      |  2.290%      |
+|  5%            | 13.246%      | 14.675%      |
+|  6%            | 15.526%      |  5.172%      |
+|  7%            | 16.074%      |  8.587%      |
+|  8%            | 17.179%      | 11.359%      |
+|  9%            | 26.112%      |  6.639%      |
+| 10%            | 21.996%      |  8.718%      |
 
 ## Experiment 4: # of Malicious Clients and Backdoor Attack Success Rate
 
