@@ -143,7 +143,7 @@ Note: CNN used 20 epochs rather than the default 10.
 
 ## Experiment 3: Poisoning Rate and Backdoor Attack Success Rate
 
-Trigger pattern size: 5 px by 5 px
+Trigger pattern size: 2 px by 2 px
 
 Trigger pattern location: (0 px, 0 px) or top left corner of images
 
