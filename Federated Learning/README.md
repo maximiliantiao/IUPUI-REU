@@ -52,6 +52,7 @@ Number of malicious clients = 100 (all clients are malicious)
 Note: CNN used 20 epochs rather than the default 10.
 
 Source category is airplane, Target category is cat
+
 |                    | MLP          | CNN          |
 | ------------------ | ------------ | ------------ |
 | Trigger Patch Size | Backdoor ASR | Backdoor ASR |
@@ -65,6 +66,22 @@ Source category is airplane, Target category is cat
 |  8 px by 8 px      | 98.792%      | 54.048%      |
 |  9 px by 9 px      | 98.591%      | 57.034%      |
 | 10 px by 10 px     | 99.397%      | 95.915%      |
+
+Source category is airplane, Target category is bird
+
+|                    | MLP          | CNN          |
+| ------------------ | ------------ | ------------ |
+| Trigger Patch Size | Backdoor ASR | Backdoor ASR |
+|  1 px by 1 px      | 15.145%      | %      |
+|  2 px by 2 px      | 30.975%      | %      |
+|  3 px by 3 px      | 56.131%      | %      |
+|  4 px by 4 px      | 95.467%      | %      |
+|  5 px by 5 px      | 98.300%      | %      |
+|  6 px by 6 px      | 99.795%      | %      |
+|  7 px by 7 px      | 99.784%      | %      |
+|  8 px by 8 px      | 99.742%      | %      |
+|  9 px by 9 px      | 99.892%      | %      |
+| 10 px by 10 px     | 99.898%      | %      |
 
 ## Experiment 2: Trigger patch location and Backdoor Attack Success Rate
 
@@ -151,5 +168,7 @@ Note: CNN used 20 epochs rather than the default 10.
 | 80%          | 99.392%      | 82.289%      |
 | 90%          | 99.191%      | 82.219%      |
 | 100%         | 99.296%      | 83.663%      |
+
+## Experiment 5: Image Similarity and Backdoor Attack Success Rate
 
 
