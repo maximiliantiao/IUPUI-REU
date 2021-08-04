@@ -49,9 +49,9 @@ Poisoning rate: 10% of the training dataset and 100% of testing dataset
 
 Number of malicious clients = 100 (all clients are malicious)
 
-Note: CNN used 20 epochs rather than the default 10.
-
 Source category is airplane, Target category is cat
+
+Note: CNN used 20 epochs rather than the default 10.
 
 |                    | MLP          | CNN          |
 | ------------------ | ------------ | ------------ |
@@ -72,16 +72,16 @@ Source category is airplane, Target category is bird
 |                    | MLP          | CNN          |
 | ------------------ | ------------ | ------------ |
 | Trigger Patch Size | Backdoor ASR | Backdoor ASR |
-|  1 px by 1 px      | 15.145%      | %      |
-|  2 px by 2 px      | 30.975%      | %      |
-|  3 px by 3 px      | 56.131%      | %      |
-|  4 px by 4 px      | 95.467%      | %      |
-|  5 px by 5 px      | 98.300%      | %      |
-|  6 px by 6 px      | 99.795%      | %      |
-|  7 px by 7 px      | 99.784%      | %      |
-|  8 px by 8 px      | 99.742%      | %      |
-|  9 px by 9 px      | 99.892%      | %      |
-| 10 px by 10 px     | 99.898%      | %      |
+|  1 px by 1 px      | 15.145%      | 10.034%      |
+|  2 px by 2 px      | 30.975%      | 11.076%      |
+|  3 px by 3 px      | 56.131%      |  9.854%      |
+|  4 px by 4 px      | 95.467%      | 21.452%      |
+|  5 px by 5 px      | 98.300%      | 59.649%      |
+|  6 px by 6 px      | 99.795%      | 90.163%      |
+|  7 px by 7 px      | 99.784%      | 92.745%      |
+|  8 px by 8 px      | 99.742%      | 99.413%      |
+|  9 px by 9 px      | 99.892%      | 97.594%      |
+| 10 px by 10 px     | 99.898%      | 99.681%      |
 
 ## Experiment 2: Trigger patch location and Backdoor Attack Success Rate
 
@@ -91,9 +91,9 @@ Trigger pattern location: (X px, X px) from the top left corner of images
 
 Poisoning rate: 10% of the training dataset and 100% of testing dataset
 
-Source category is airplane, Target category is cat
-
 Number of malicious clients = 100 (all clients are malicious)
+
+Source category is airplane, Target category is cat
 
 Note: CNN used 20 epochs rather than the default 10.
 
@@ -116,6 +116,30 @@ Note: CNN used 20 epochs rather than the default 10.
 |  (14 px, 14 px)        |  87.350%     |  77.684%     |
 |  (15 px, 15 px)        |  85.968%     |  26.589%     |
 |  (16 px, 16 px)        |  90.249%     |  71.186%     |
+
+Source category is airplane, Target category is bird
+
+Note: CNN used 20 epochs rather than the default 10.
+
+|                        | MLP          | CNN          |
+| ---------------------- | ------------ | ------------ |
+| Trigger Patch Location | Backdoor ASR | Backdoor ASR |
+|  (1 px, 1 px)          |  92.359%     |  %     |
+|  (2 px, 2 px)          |  97.574%     |  %     |
+|  (3 px, 3 px)          |  93.304%     |  %     |
+|  (4 px, 4 px)          |  90.559%     |  %     |
+|  (5 px, 5 px)          |  91.879%     |  %     |
+|  (6 px, 6 px)          |  96.478%     |  %     |
+|  (7 px, 7 px)          |  96.401%     |  %     |
+|  (8 px, 8 px)          |  95.410%     |  %     |
+|  (9 px, 9 px)          |  94.086%     |  %     |
+|  (10 px, 10 px)        |  94.654%     |  %     |
+|  (11 px, 11 px)        |  92.088%     |  %     |
+|  (12 px, 12 px)        |  93.468%     |  %     |
+|  (13 px, 13 px)        |  92.619%     |  %     |
+|  (14 px, 14 px)        |  94.620%     |  %     |
+|  (15 px, 15 px)        |  88.912%     |  %     |
+|  (16 px, 16 px)        |  93.045%     |  %     |
 
 ## Experiment 3: Poisoning Rate and Backdoor Attack Success Rate
 
