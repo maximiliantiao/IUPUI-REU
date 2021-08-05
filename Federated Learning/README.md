@@ -194,6 +194,21 @@ Note: CNN used 20 epochs rather than the default 10.
 | 90%          | 99.191%      | 82.219%      |
 | 100%         | 99.296%      | 83.663%      |
 
-## Experiment 5: Image Similarity and Backdoor Attack Success Rate
+Source category is airplane, Target category is bird
 
+Note: CNN used 20 epochs rather than the default 10.
+
+|              | MLP          | CNN          |
+| ------------ | ------------ | ------------ |
+| % of clients | Backdoor ASR | Backdoor ASR |
+| 10%          | 77.893%      | 42.051%      |
+| 20%          | 88.295%      | 19.590%      |
+| 30%          | 71.495%      | 46.756%      |
+| 40%          | 83.103%      | 46.559%      |
+| 50%          | 84.109%      | 34.017%      |
+| 60%          | 79.156%      | 34.271%      |
+| 70%          | 86.167%      | 11.178%      |
+| 80%          | 79.770%      | 30.416%      |
+| 90%          | 88.677%      | 70.408%      |
+| 100%         | 89.740%      | 47.198%      |
 
