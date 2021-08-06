@@ -110,18 +110,20 @@ if __name__ == '__main__':
     elif args.poison == 'True':
         size = 5
         poisoning_rate = 10
-        # location = 1
-        for location in range(1, 17, 1):
+        location = 1
+        args.advries = 100
+        for _ in range(0, 1, 1):
             # Paste trigger patch onto dataset ############################################################
             paste_patch(args.src_cate, args.trg_cate, size, location, poisoning_rate)
 
             # Load poisoned dataset and split users #######################################################
             if args.dataset == 'cifar':
                 trans_cifar = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-                dataset_train = datasets.ImageFolder('./poisoned_cifar10_pngs/train', transform=trans_cifar)
+                dataset_train = datasets.ImageFolder('./cifar10_pngs/train', transform=trans_cifar)
+                poisoned_dataset_train = datasets.ImageFolder('./poisoned_cifar10_pngs/train', transform=trans_cifar)
                 dataset_test = datasets.ImageFolder('./poisoned_cifar10_pngs/test', transform=trans_cifar)
                 if args.iid:
-                    dict_users = cifar_iid(dataset_train, args.num_users)
+                    dict_users = cifar_iid(dataset_train, args.num_users - args.advries, True, poisoned_dataset_train, args.advries)
                 else:
                     exit('Error: only consider IID setting in CIFAR10')
             else:
@@ -166,7 +168,10 @@ if __name__ == '__main__':
                 m = max(int(args.frac * args.num_users), 1)
                 idxs_users = np.random.choice(range(args.num_users), m, replace=False)
                 for idx in idxs_users:
-                    local = LocalUpdate(args=args, dataset=dataset_train, idxs=dict_users[idx])
+                    if idx > args.num_users - args.advries and idx < args.num_users + args.advries:
+                        local = LocalUpdate(args=args, dataset=poisoned_dataset_train, idxs=dict_users[idx])
+                    else:
+                        local = LocalUpdate(args=args, dataset=dataset_train, idxs=dict_users[idx])
                     w, loss = local.train(net=copy.deepcopy(net_glob).to(args.device))
                     if args.all_clients:
                         w_locals[idx] = copy.deepcopy(w)

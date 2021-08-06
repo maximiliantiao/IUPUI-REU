@@ -1,7 +1,7 @@
 from PIL import Image
 
 def remove_patch(src_cate, trg_cate):
-	for i in range(1, 501):
+	for i in range(1, 5001):
 
 		train_orig_path = "./cifar10_pngs/train/" + src_cate + "/"
 		train_target_path = "./poisoned_cifar10_pngs/train/" + src_cate + "/"
@@ -60,5 +60,8 @@ def remove_patch(src_cate, trg_cate):
 		# Save patched image to same path
 		test_poisoned_cifar10_png.save(test_target_path)
 
-# if __name__ == '__main__':
-# 	remove_patch('truck', 'frog')
+if __name__ == '__main__':
+	classes = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+	for i in range(len(classes)):
+		for j in range(i+1, len(classes)):
+			remove_patch(classes[i], classes[j])

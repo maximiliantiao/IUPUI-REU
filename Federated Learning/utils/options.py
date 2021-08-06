@@ -16,6 +16,7 @@ def args_parser():
     parser.add_argument('--lr', type=float, default=0.01, help="learning rate")
     parser.add_argument('--momentum', type=float, default=0.5, help="SGD momentum (default: 0.5)")
     parser.add_argument('--split', type=str, default='user', help="train-test split type, user or sample")
+    parser.add_argument('--advries', type=int, default=0, help="Number of adversaries to execute backdoor attack")
 
     # model arguments
     parser.add_argument('--model', type=str, default='mlp', help='model name')
@@ -27,8 +28,8 @@ def args_parser():
     parser.add_argument('--max_pool', type=str, default='True',
                         help="Whether use max pooling rather than strided convolutions")
     parser.add_argument('--poison', type=str, default='False', help="Whether to attack model with trigger back or just train with benign")
-    parser.add_argument('--src_cate', type=str, default='frog', help="Source category to poison and mis-classify")
-    parser.add_argument('--trg_cate', type=str, default='truck', help="Target category to have image classify to")
+    parser.add_argument('--src_cate', type=str, default='airplane', help="Source category to poison and mis-classify")
+    parser.add_argument('--trg_cate', type=str, default='cat', help="Target category to have image classify to")
 
     # other arguments
     parser.add_argument('--dataset', type=str, default='mnist', help="name of dataset")
