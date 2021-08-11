@@ -1,0 +1,305 @@
+> python .\main_fed.py --dataset cifar --iid --poison True --src_cate airplane --trg_cate bird --advries 100
+10% of malicious clients
+Training and testing on poisoned dataset
+Round   0, Average loss 1.827
+Round   1, Average loss 1.630
+Round   2, Average loss 1.581
+Round   3, Average loss 1.512
+Round   4, Average loss 1.492
+Round   5, Average loss 1.420
+Round   6, Average loss 1.414
+Round   7, Average loss 1.409
+Round   8, Average loss 1.396
+Round   9, Average loss 1.439
+Backdoor Attack Success Rate: 58.35411471321695
+Testing accuracy: 46.32
+Removing trigger patch from datasets
+20% of malicious clients
+Training and testing on poisoned dataset
+Round   0, Average loss 1.825
+Round   1, Average loss 1.646
+Round   2, Average loss 1.566
+Round   3, Average loss 1.536
+Round   4, Average loss 1.524
+Round   5, Average loss 1.484
+Round   6, Average loss 1.479
+Round   7, Average loss 1.419
+Round   8, Average loss 1.449
+Round   9, Average loss 1.409
+Backdoor Attack Success Rate: 60.953608247422686
+Testing accuracy: 46.36
+Removing trigger patch from datasets
+30% of malicious clients
+Training and testing on poisoned dataset
+Round   0, Average loss 1.817
+Round   1, Average loss 1.651
+Round   2, Average loss 1.603
+Round   3, Average loss 1.548
+Round   4, Average loss 1.507
+Round   5, Average loss 1.499
+Round   6, Average loss 1.468
+Round   7, Average loss 1.451
+Round   8, Average loss 1.434
+Round   9, Average loss 1.414
+Backdoor Attack Success Rate: 78.50678733031674
+Testing accuracy: 44.76
+Removing trigger patch from datasets
+40% of malicious clients
+Training and testing on poisoned dataset
+Round   0, Average loss 1.833
+Round   1, Average loss 1.664
+Round   2, Average loss 1.597
+Round   3, Average loss 1.541
+Round   4, Average loss 1.523
+Round   5, Average loss 1.493
+Round   6, Average loss 1.475
+Round   7, Average loss 1.461
+Round   8, Average loss 1.443
+Round   9, Average loss 1.431
+Backdoor Attack Success Rate: 83.41013824884793
+Testing accuracy: 44.83
+Removing trigger patch from datasets
+50% of malicious clients
+Training and testing on poisoned dataset
+Round   0, Average loss 1.829
+Round   1, Average loss 1.662
+Round   2, Average loss 1.606
+Round   3, Average loss 1.564
+Round   4, Average loss 1.497
+Round   5, Average loss 1.480
+Round   6, Average loss 1.475
+Round   7, Average loss 1.448
+Round   8, Average loss 1.468
+Round   9, Average loss 1.429
+Backdoor Attack Success Rate: 84.57943925233646
+Testing accuracy: 45.12
+Removing trigger patch from datasets
+60% of malicious clients
+Training and testing on poisoned dataset
+Round   0, Average loss 1.826
+Round   1, Average loss 1.649
+Round   2, Average loss 1.578
+Round   3, Average loss 1.561
+Round   4, Average loss 1.517
+Round   5, Average loss 1.501
+Round   6, Average loss 1.467
+Round   7, Average loss 1.449
+Round   8, Average loss 1.438
+Round   9, Average loss 1.418
+Backdoor Attack Success Rate: 82.83166109253067
+Testing accuracy: 44.44
+Removing trigger patch from datasets
+70% of malicious clients
+Training and testing on poisoned dataset
+Round   0, Average loss 1.828
+Round   1, Average loss 1.652
+Round   2, Average loss 1.583
+Round   3, Average loss 1.531
+Round   4, Average loss 1.502
+Round   5, Average loss 1.484
+Round   6, Average loss 1.433
+Round   7, Average loss 1.466
+Round   8, Average loss 1.389
+Round   9, Average loss 1.400
+Backdoor Attack Success Rate: 87.1559633027523
+Testing accuracy: 44.95
+Removing trigger patch from datasets
+80% of malicious clients
+Training and testing on poisoned dataset
+Round   0, Average loss 1.857
+Round   1, Average loss 1.637
+Round   2, Average loss 1.566
+Round   3, Average loss 1.543
+Round   4, Average loss 1.492
+Round   5, Average loss 1.471
+Round   6, Average loss 1.480
+Round   7, Average loss 1.454
+Round   8, Average loss 1.418
+Round   9, Average loss 1.396
+Backdoor Attack Success Rate: 89.77272727272727
+Testing accuracy: 44.18
+Removing trigger patch from datasets
+90% of malicious clients
+Training and testing on poisoned dataset
+Round   0, Average loss 1.839
+Round   1, Average loss 1.654
+Round   2, Average loss 1.555
+Round   3, Average loss 1.519
+Round   4, Average loss 1.482
+Round   5, Average loss 1.431
+Round   6, Average loss 1.449
+Round   7, Average loss 1.379
+Round   8, Average loss 1.415
+Round   9, Average loss 1.314
+Backdoor Attack Success Rate: 88.58757062146893
+Testing accuracy: 44.11
+Removing trigger patch from datasets
+100% of malicious clients
+Training and testing on poisoned dataset
+Round   0, Average loss 1.864
+Round   1, Average loss 1.684
+Round   2, Average loss 1.566
+Round   3, Average loss 1.516
+Round   4, Average loss 1.491
+Round   5, Average loss 1.470
+Round   6, Average loss 1.467
+Round   7, Average loss 1.428
+Round   8, Average loss 1.384
+Round   9, Average loss 1.383
+Backdoor Attack Success Rate: 94.05286343612335
+Testing accuracy: 41.50
+Removing trigger patch from datasets
+
+=============================================================================
+
+> python .\main_fed.py --dataset cifar --iid --poison True --src_cate airplane --trg_cate bird --advries 100
+10% poisoning
+Training and testing on poisoned dataset
+Round   0, Average loss 1.839
+Round   1, Average loss 1.634
+Round   2, Average loss 1.577
+Round   3, Average loss 1.490
+Round   4, Average loss 1.481
+Round   5, Average loss 1.443
+Round   6, Average loss 1.436
+Round   7, Average loss 1.426
+Round   8, Average loss 1.417
+Round   9, Average loss 1.408
+Backdoor Attack Success Rate: 77.89351851851852
+Testing accuracy: 45.54
+Removing trigger patch from datasets
+10% poisoning
+Training and testing on poisoned dataset
+Round   0, Average loss 1.830
+Round   1, Average loss 1.634
+Round   2, Average loss 1.586
+Round   3, Average loss 1.542
+Round   4, Average loss 1.487
+Round   5, Average loss 1.464
+Round   6, Average loss 1.463
+Round   7, Average loss 1.460
+Round   8, Average loss 1.433
+Round   9, Average loss 1.412
+Backdoor Attack Success Rate: 88.29545454545455
+Testing accuracy: 44.29
+Removing trigger patch from datasets
+10% poisoning
+Training and testing on poisoned dataset
+Round   0, Average loss 1.826
+Round   1, Average loss 1.663
+Round   2, Average loss 1.577
+Round   3, Average loss 1.550
+Round   4, Average loss 1.509
+Round   5, Average loss 1.489
+Round   6, Average loss 1.454
+Round   7, Average loss 1.458
+Round   8, Average loss 1.425
+Round   9, Average loss 1.416
+Backdoor Attack Success Rate: 71.49532710280374
+Testing accuracy: 45.84
+Removing trigger patch from datasets
+10% poisoning
+Training and testing on poisoned dataset
+Round   0, Average loss 1.828
+Round   1, Average loss 1.662
+Round   2, Average loss 1.592
+Round   3, Average loss 1.551
+Round   4, Average loss 1.520
+Round   5, Average loss 1.486
+Round   6, Average loss 1.474
+Round   7, Average loss 1.470
+Round   8, Average loss 1.444
+Round   9, Average loss 1.424
+Backdoor Attack Success Rate: 83.10344827586206
+Testing accuracy: 44.97
+Removing trigger patch from datasets
+10% poisoning
+Training and testing on poisoned dataset
+Round   0, Average loss 1.828
+Round   1, Average loss 1.652
+Round   2, Average loss 1.594
+Round   3, Average loss 1.533
+Round   4, Average loss 1.529
+Round   5, Average loss 1.487
+Round   6, Average loss 1.479
+Round   7, Average loss 1.487
+Round   8, Average loss 1.456
+Round   9, Average loss 1.433
+Backdoor Attack Success Rate: 84.10991636798089
+Testing accuracy: 44.73
+Removing trigger patch from datasets
+10% poisoning
+Training and testing on poisoned dataset
+Round   0, Average loss 1.817
+Round   1, Average loss 1.643
+Round   2, Average loss 1.597
+Round   3, Average loss 1.531
+Round   4, Average loss 1.524
+Round   5, Average loss 1.477
+Round   6, Average loss 1.469
+Round   7, Average loss 1.471
+Round   8, Average loss 1.457
+Round   9, Average loss 1.425
+Backdoor Attack Success Rate: 79.1566265060241
+Testing accuracy: 45.11
+Removing trigger patch from datasets
+10% poisoning
+Training and testing on poisoned dataset
+Round   0, Average loss 1.824
+Round   1, Average loss 1.649
+Round   2, Average loss 1.577
+Round   3, Average loss 1.543
+Round   4, Average loss 1.541
+Round   5, Average loss 1.477
+Round   6, Average loss 1.449
+Round   7, Average loss 1.445
+Round   8, Average loss 1.427
+Round   9, Average loss 1.424
+Backdoor Attack Success Rate: 86.16780045351474
+Testing accuracy: 44.10
+Removing trigger patch from datasets
+10% poisoning
+Training and testing on poisoned dataset
+Round   0, Average loss 1.849
+Round   1, Average loss 1.655
+Round   2, Average loss 1.586
+Round   3, Average loss 1.551
+Round   4, Average loss 1.473
+Round   5, Average loss 1.458
+Round   6, Average loss 1.449
+Round   7, Average loss 1.403
+Round   8, Average loss 1.411
+Round   9, Average loss 1.392
+Backdoor Attack Success Rate: 79.77011494252874
+Testing accuracy: 44.99
+Removing trigger patch from datasets
+10% poisoning
+Training and testing on poisoned dataset
+Round   0, Average loss 1.836
+Round   1, Average loss 1.656
+Round   2, Average loss 1.537
+Round   3, Average loss 1.498
+Round   4, Average loss 1.439
+Round   5, Average loss 1.444
+Round   6, Average loss 1.475
+Round   7, Average loss 1.436
+Round   8, Average loss 1.354
+Round   9, Average loss 1.327
+Backdoor Attack Success Rate: 88.67713004484304
+Testing accuracy: 43.80
+Removing trigger patch from datasets
+10% poisoning
+Training and testing on poisoned dataset
+Round   0, Average loss 1.868
+Round   1, Average loss 1.657
+Round   2, Average loss 1.590
+Round   3, Average loss 1.517
+Round   4, Average loss 1.496
+Round   5, Average loss 1.444
+Round   6, Average loss 1.464
+Round   7, Average loss 1.392
+Round   8, Average loss 1.407
+Round   9, Average loss 1.399
+Backdoor Attack Success Rate: 89.74082073434126
+Testing accuracy: 41.82
+Removing trigger patch from datasets
